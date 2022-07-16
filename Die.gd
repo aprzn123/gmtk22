@@ -42,11 +42,23 @@ func _on_RollTimer_timeout():
 	random_face()
 	face_swaps_left_anim -= 1
 	if face_swaps_left_anim == 0:
-		pass
-		# TODO: Make something happen when the dice land
+		execute_die()
 	else:
 		$RollTimer.start()
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_accept"):
 		roll()
+
+func execute_die():
+	match faces[current_face_idx].face_id:
+		"AddDie":
+			var new_die = preload("res://Die.tscn")
+			for i in range(6):
+				new_die.faces[i] = load("res://DieFaces/BlankFace.tres")
+		"Add":
+			pass
+		"Blank":
+			pass
+		_:
+			print_debug("INVALID FACE ID " + faces[current_face_idx].face_id)
