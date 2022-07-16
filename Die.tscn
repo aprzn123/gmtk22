@@ -1,18 +1,22 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Die.gd" type="Script" id=1]
 [ext_resource path="res://DieFaces/BlankFace.tres" type="Resource" id=2]
 [ext_resource path="res://Sprites/AddDieFace.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/BlankFace.png" type="Texture" id=4]
+[ext_resource path="res://DieFaces/AddFace.tres" type="Resource" id=5]
+[ext_resource path="res://Sprites/AddFace.png" type="Texture" id=6]
+[ext_resource path="res://DieFaces/AddDieFace.tres" type="Resource" id=7]
 
 [node name="Die" type="Node2D"]
 script = ExtResource( 1 )
-faces = [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ) ]
+faces = [ ExtResource( 7 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 5 ), ExtResource( 7 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
+visible = false
 texture = ExtResource( 3 )
 
 [node name="Spread" type="Node2D" parent="."]
-visible = false
 
 [node name="Sprite" type="Sprite" parent="Spread"]
 position = Vector2( 0, -68 )
@@ -20,18 +24,18 @@ texture = ExtResource( 3 )
 
 [node name="Sprite2" type="Sprite" parent="Spread"]
 position = Vector2( 68, 0 )
-texture = ExtResource( 3 )
+texture = ExtResource( 6 )
 
 [node name="Sprite3" type="Sprite" parent="Spread"]
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 
 [node name="Sprite4" type="Sprite" parent="Spread"]
 position = Vector2( 0, 136 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 
 [node name="Sprite5" type="Sprite" parent="Spread"]
 position = Vector2( -68, 0 )
-texture = ExtResource( 3 )
+texture = ExtResource( 6 )
 
 [node name="Sprite6" type="Sprite" parent="Spread"]
 position = Vector2( 0, 68 )
@@ -39,3 +43,9 @@ texture = ExtResource( 3 )
 
 [node name="RollTimer" type="Timer" parent="."]
 wait_time = 0.1
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[connection signal="timeout" from="RollTimer" to="." method="_on_RollTimer_timeout"]

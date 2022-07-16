@@ -27,5 +27,26 @@ func _process(delta):
 	$Spread/Sprite6.texture = faces[5].texture
 
 func roll():
-	face_swaps_left_anim = rand_range(5,10)
+	face_swaps_left_anim = int(rand_range(5,10))
 	$RollTimer.start()
+
+func random_face():
+	randomize()
+	var target_faces = range(6)
+	target_faces.remove(opposite_face(current_face_idx))
+	target_faces.erase(current_face_idx)
+	target_faces.shuffle()
+	current_face_idx = target_faces[0]
+
+func _on_RollTimer_timeout():
+	random_face()
+	face_swaps_left_anim -= 1
+	if face_swaps_left_anim == 0:
+		pass
+		# TODO: Make something happen when the dice land
+	else:
+		$RollTimer.start()
+
+func _unhandled_input(event):
+	if event.is_action_pressed("ui_accept"):
+		roll()
