@@ -8,3 +8,4 @@ script = ExtResource( 2 )
 texture = ExtResource( 1 )
 face_id = "Blank"
 value = 0
+has_action = false

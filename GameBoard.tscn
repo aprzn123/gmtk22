@@ -77,10 +77,27 @@ texture = ExtResource( 7 )
 position = Vector2( 0, 34 )
 texture = ExtResource( 7 )
 
-[node name="RollTimer" type="Timer" parent="."]
+[node name="RollingFinished" type="Timer" parent="."]
 wait_time = 1.1
 one_shot = true
 
-[connection signal="die_cast" from="CenterContainer/Dice/Die" to="." method="die_cast"]
+[node name="SelectDieLabel" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -256.0
+margin_top = -14.0
+margin_right = 256.0
+text = "Choose a die to target"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="die_selected" from="CenterContainer/Dice/Die" to="." method="select_die"]
+[connection signal="flip_die" from="CenterContainer/Dice/Die" to="." method="flip_die"]
+[connection signal="new_used_die" from="CenterContainer/Dice/Die" to="." method="new_used_die"]
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
-[connection signal="timeout" from="RollTimer" to="." method="resolve_actions"]
+[connection signal="timeout" from="RollingFinished" to="." method="rolling_finished"]
