@@ -1,5 +1,7 @@
 tool
-extends Node2D
+extends Control
+
+signal die_cast(face_id)
 
 export (Array, Resource) var faces = [
 	load("res://DieFaces/BlankFace.tres"), 
@@ -9,6 +11,7 @@ export (Array, Resource) var faces = [
 	load("res://DieFaces/BlankFace.tres"), 
 	load("res://DieFaces/BlankFace.tres")
 ]
+export (bool) var spread = false
 
 export (int) var current_face_idx = 0
 
@@ -25,6 +28,12 @@ func _process(delta):
 	$Spread/Sprite4.texture = faces[3].texture
 	$Spread/Sprite5.texture = faces[4].texture
 	$Spread/Sprite6.texture = faces[5].texture
+	if spread: 
+		$Spread.visible = true
+		$Sprite.visible = false
+	else:
+		$Spread.visible = false
+		$Sprite.visible = true
 
 func roll():
 	face_swaps_left_anim = int(rand_range(5,10))
@@ -42,23 +51,8 @@ func _on_RollTimer_timeout():
 	random_face()
 	face_swaps_left_anim -= 1
 	if face_swaps_left_anim == 0:
-		execute_die()
+		emit_signal("die_cast", faces[current_face_idx].face_id)
 	else:
 		$RollTimer.start()
 
-func _unhandled_input(event):
-	if event.is_action_pressed("ui_accept"):
-		roll()
 
-func execute_die():
-	match faces[current_face_idx].face_id:
-		"AddDie":
-			var new_die = preload("res://Die.tscn")
-			for i in range(6):
-				new_die.faces[i] = load("res://DieFaces/BlankFace.tres")
-		"Add":
-			pass
-		"Blank":
-			pass
-		_:
-			print_debug("INVALID FACE ID " + faces[current_face_idx].face_id)

@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Die.tscn" type="PackedScene" id=1]
+[ext_resource path="res://GameBoard.gd" type="Script" id=2]
+[ext_resource path="res://DieFaces/BlankFace.tres" type="Resource" id=3]
+[ext_resource path="res://DiceContainer.gd" type="Script" id=4]
+[ext_resource path="res://DieFaces/AddFace.tres" type="Resource" id=5]
+[ext_resource path="res://DieFaces/AddDieFace.tres" type="Resource" id=6]
+
+[node name="GameBoard" type="Node"]
+script = ExtResource( 2 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dice" type="GridContainer" parent="CenterContainer"]
+margin_left = 512.0
+margin_top = 300.0
+margin_right = 512.0
+margin_bottom = 300.0
+custom_constants/vseparation = 36
+custom_constants/hseparation = 36
+script = ExtResource( 4 )
+
+[node name="Die" parent="CenterContainer/Dice" instance=ExtResource( 1 )]
+faces = [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ) ]
+
+[connection signal="die_cast" from="CenterContainer/Dice/Die" to="." method="die_cast"]
