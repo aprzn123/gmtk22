@@ -1,6 +1,7 @@
 extends Node
 
 var roll_result = 0
+var action_queue = []
 
 func die_cast(face_id):
 	match face_id:
@@ -11,28 +12,30 @@ func die_cast(face_id):
 		"Blank":
 			pass
 		"Number1":
-			pass
+			roll_result += 1
 		"Number2":
-			pass
+			roll_result += 2
 		"Number3":
-			pass
+			roll_result += 3
 		"Number4":
-			pass
+			roll_result += 4
 		"Number5":
-			pass
+			roll_result += 5
 		"Number6":
-			pass
+			roll_result += 6
 		"Number7":
-			pass
+			roll_result += 7
 		"Number8":
-			pass
+			roll_result += 8
 		"Number9":
-			pass
+			roll_result += 9
 		_:
 			print_debug("INVALID FACE ID " + face_id)
 	print('die cast')
 
 func roll():
+	roll_result = 0
+	var action_queue = []
 	for die in get_dice():
 		die.roll()
 

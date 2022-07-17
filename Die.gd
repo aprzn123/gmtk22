@@ -11,7 +11,6 @@ export (Array, Resource) var faces = [
 	load("res://DieFaces/BlankFace.tres"), 
 	load("res://DieFaces/BlankFace.tres")
 ]
-export (bool) var spread = false
 
 export (int) var current_face_idx = 0
 
@@ -23,12 +22,6 @@ func opposite_face(n):
 
 func _process(delta):
 	$Sprite.texture = faces[current_face_idx].texture
-	if spread: 
-		$Spread.visible = true
-		$Sprite.visible = false
-	else:
-		$Spread.visible = false
-		$Sprite.visible = true
 
 func roll():
 	face_swaps_left_anim = int(rand_range(5,10))

@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Die.gd" type="Script" id=1]
 [ext_resource path="res://DieFaces/BlankFace.tres" type="Resource" id=2]
-[ext_resource path="res://Sprites/Special_Blank.png" type="Texture" id=6]
+[ext_resource path="res://DieFaces/Number5Face.tres" type="Resource" id=3]
+[ext_resource path="res://Sprites/Num_1.png" type="Texture" id=4]
+[ext_resource path="res://DieFaces/Number1Face.tres" type="Resource" id=5]
+[ext_resource path="res://DieFaces/Number3Face.tres" type="Resource" id=6]
 
 [node name="Die" type="Control" groups=[
 "Dice",
@@ -12,37 +15,11 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-faces = [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ) ]
+faces = [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 3 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 6 )
+texture = ExtResource( 4 )
 centered = false
-
-[node name="Spread" type="Node2D" parent="."]
-visible = false
-
-[node name="Sprite" type="Sprite" parent="Spread"]
-position = Vector2( 0, -34 )
-texture = ExtResource( 6 )
-
-[node name="Sprite2" type="Sprite" parent="Spread"]
-position = Vector2( 34, 0 )
-texture = ExtResource( 6 )
-
-[node name="Sprite3" type="Sprite" parent="Spread"]
-texture = ExtResource( 6 )
-
-[node name="Sprite4" type="Sprite" parent="Spread"]
-position = Vector2( 0, 68 )
-texture = ExtResource( 6 )
-
-[node name="Sprite5" type="Sprite" parent="Spread"]
-position = Vector2( -34, 0 )
-texture = ExtResource( 6 )
-
-[node name="Sprite6" type="Sprite" parent="Spread"]
-position = Vector2( 0, 34 )
-texture = ExtResource( 6 )
 
 [node name="RollTimer" type="Timer" parent="."]
 wait_time = 0.1
