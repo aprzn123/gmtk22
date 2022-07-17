@@ -45,6 +45,5 @@ func add_die():
 	new_die.connect("die_cast", self, "die_cast")
 
 
-
 func _on_Button_pressed():
 	roll()

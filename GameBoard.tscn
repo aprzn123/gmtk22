@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Die.tscn" type="PackedScene" id=1]
 [ext_resource path="res://GameBoard.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://DiceContainer.gd" type="Script" id=4]
 [ext_resource path="res://DieFaces/AddFace.tres" type="Resource" id=5]
 [ext_resource path="res://DieFaces/AddDieFace.tres" type="Resource" id=6]
+[ext_resource path="res://Sprites/Special_Blank.png" type="Texture" id=7]
+[ext_resource path="res://DieSpreadPopup.gd" type="Script" id=8]
 
 [node name="GameBoard" type="Node"]
 script = ExtResource( 2 )
@@ -13,18 +15,26 @@ script = ExtResource( 2 )
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Dice" type="GridContainer" parent="CenterContainer"]
-margin_left = 256.0
-margin_top = 144.0
-margin_right = 256.0
-margin_bottom = 144.0
-custom_constants/vseparation = 36
-custom_constants/hseparation = 36
+margin_left = 240.0
+margin_top = 128.0
+margin_right = 272.0
+margin_bottom = 160.0
+mouse_filter = 2
+columns = 2
 script = ExtResource( 4 )
 
 [node name="Die" parent="CenterContainer/Dice" instance=ExtResource( 1 )]
+margin_right = 32.0
+margin_bottom = 32.0
 faces = [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ) ]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Button" type="Button" parent="."]
 anchor_left = 0.5
@@ -34,6 +44,37 @@ margin_top = 1.0
 margin_right = 18.0
 margin_bottom = 21.0
 text = "Roll"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DieSpreadPopup" type="Node2D" parent="."]
+visible = false
+position = Vector2( 54, 54 )
+script = ExtResource( 8 )
+
+[node name="Sprite" type="Sprite" parent="DieSpreadPopup"]
+position = Vector2( 0, -34 )
+texture = ExtResource( 7 )
+
+[node name="Sprite2" type="Sprite" parent="DieSpreadPopup"]
+position = Vector2( 34, 0 )
+texture = ExtResource( 7 )
+
+[node name="Sprite3" type="Sprite" parent="DieSpreadPopup"]
+texture = ExtResource( 7 )
+
+[node name="Sprite4" type="Sprite" parent="DieSpreadPopup"]
+position = Vector2( 0, 68 )
+texture = ExtResource( 7 )
+
+[node name="Sprite5" type="Sprite" parent="DieSpreadPopup"]
+position = Vector2( -34, 0 )
+texture = ExtResource( 7 )
+
+[node name="Sprite6" type="Sprite" parent="DieSpreadPopup"]
+position = Vector2( 0, 34 )
+texture = ExtResource( 7 )
 
 [connection signal="die_cast" from="CenterContainer/Dice/Die" to="." method="die_cast"]
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
