@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Die.gd" type="Script" id=1]
+[ext_resource path="res://DieFaces/BlankFace.tres" type="Resource" id=2]
 [ext_resource path="res://Sprites/Special_Blank.png" type="Texture" id=6]
 
 [node name="Die" type="Control"]
@@ -8,6 +9,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+faces = [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 6 )

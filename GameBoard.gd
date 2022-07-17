@@ -24,3 +24,7 @@ func add_die():
 	$CenterContainer/Dice.add_child(new_die)
 	new_die.connect("die_cast", self, "die_cast")
 
+
+
+func _on_Button_pressed():
+	roll()

@@ -13,9 +13,6 @@ script = ExtResource( 2 )
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Dice" type="GridContainer" parent="CenterContainer"]
 margin_left = 256.0
@@ -29,4 +26,14 @@ script = ExtResource( 4 )
 [node name="Die" parent="CenterContainer/Dice" instance=ExtResource( 1 )]
 faces = [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ) ]
 
+[node name="Button" type="Button" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -18.0
+margin_top = 1.0
+margin_right = 18.0
+margin_bottom = 21.0
+text = "Roll"
+
 [connection signal="die_cast" from="CenterContainer/Dice/Die" to="." method="die_cast"]
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
