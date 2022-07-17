@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Die.tscn" type="PackedScene" id=1]
 [ext_resource path="res://GameBoard.gd" type="Script" id=2]
@@ -8,6 +8,23 @@
 [ext_resource path="res://DieFaces/AddDieFace.tres" type="Resource" id=6]
 [ext_resource path="res://Sprites/Special_Blank.png" type="Texture" id=7]
 [ext_resource path="res://DieSpreadPopup.gd" type="Script" id=8]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Glow"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.984314, 1, 0.47451, 1 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="GameBoard" type="Node"]
 script = ExtResource( 2 )
@@ -30,9 +47,13 @@ columns = 2
 script = ExtResource( 4 )
 
 [node name="Die" parent="CenterContainer/Dice" instance=ExtResource( 1 )]
+modulate = Color( 0.999928, 1, 0.997591, 1 )
 margin_right = 32.0
 margin_bottom = 32.0
 faces = [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ) ]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CenterContainer/Dice/Die"]
+anims/Glow = SubResource( 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
