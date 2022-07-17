@@ -7,3 +7,4 @@
 script = ExtResource( 2 )
 texture = ExtResource( 1 )
 face_id = "AddDie"
+value = 0
